@@ -7,9 +7,9 @@ public class TipoProducto {
     private final String nombre;
     private final String categoria;
     private final String unidadMedida;
-     int porcentajeIva;
+    private final int porcentajeIva;
 
-    public TipoProducto(String nombre, String categoria, int unidadMedida) {
+    public TipoProducto(String nombre, String categoria, String unidadMedida, int porcentajeIva) {
         if (nombre == null || nombre.isBlank()) {
             throw new IllegalArgumentException("El nombre del tipo de producto no puede estar vacío.");
         }
@@ -19,9 +19,13 @@ public class TipoProducto {
         if (unidadMedida == null || unidadMedida.isBlank()) {
             throw new IllegalArgumentException("La unidad de medida no puede estar vacía.");
         }
+        if (porcentajeIva < 0 || porcentajeIva > 100) {
+            throw new IllegalArgumentException("El porcentaje de IVA debe estar entre 0 y 100.");
+        }
         this.nombre = nombre.trim();
         this.categoria = categoria.trim();
         this.unidadMedida = unidadMedida.trim();
+        this.porcentajeIva = porcentajeIva;
     }
 
     // Recibe el estado extrínseco (precio, stock, pasillo) en el momento de renderizar/mostrar
@@ -51,17 +55,27 @@ public class TipoProducto {
         return unidadMedida;
     }
 
+    public int getPorcentajeIva() {
+        return porcentajeIva;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof TipoProducto that)) return false;
-        return nombre.equalsIgnoreCase(that.nombre)
+        return porcentajeIva == that.porcentajeIva
+                && nombre.equalsIgnoreCase(that.nombre)
                 && categoria.equalsIgnoreCase(that.categoria)
                 && unidadMedida.equalsIgnoreCase(that.unidadMedida);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombre.toLowerCase(), categoria.toLowerCase(), unidadMedida.toLowerCase());
+        return Objects.hash(
+                nombre.toLowerCase(),
+                categoria.toLowerCase(),
+                unidadMedida.toLowerCase(),
+                porcentajeIva
+        );
     }
 }
