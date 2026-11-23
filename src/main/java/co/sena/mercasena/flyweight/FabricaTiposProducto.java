@@ -10,8 +10,8 @@ public class FabricaTiposProducto {
 
     public TipoProducto obtener(String categoria, String unidad, int porcentajeIva) {
         validarDatosTipo(categoria, unidad, porcentajeIva);
-
         String clave = construirClave(categoria, unidad, porcentajeIva);
+
         TipoProducto tipo = cache.get(clave);
         if (tipo == null) {
             tipo = new TipoProducto(categoria.trim(), unidad.trim(), porcentajeIva);

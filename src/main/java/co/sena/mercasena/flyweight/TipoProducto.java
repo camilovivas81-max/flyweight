@@ -9,7 +9,7 @@ public class TipoProducto {
     private final String unidadMedida;
      int porcentajeIva;
 
-    public TipoProducto(String nombre, String categoria, String unidadMedida) {
+    public TipoProducto(String nombre, String categoria, int unidadMedida) {
         if (nombre == null || nombre.isBlank()) {
             throw new IllegalArgumentException("El nombre del tipo de producto no puede estar vacío.");
         }
