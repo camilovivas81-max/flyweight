@@ -6,18 +6,15 @@ public class TipoProducto {
 
     private final String nombre;
     private final String categoria;
-    private final String unidadMedida;
+    private String unidadMedida = "null";
     private final int porcentajeIva;
 
-    public TipoProducto(String nombre, String categoria, String unidadMedida, int porcentajeIva) {
+    public TipoProducto(String nombre, String categoria, int porcentajeIva) {
         if (nombre == null || nombre.isBlank()) {
             throw new IllegalArgumentException("El nombre del tipo de producto no puede estar vacío.");
         }
         if (categoria == null || categoria.isBlank()) {
             throw new IllegalArgumentException("La categoría no puede estar vacía.");
-        }
-        if (unidadMedida == null || unidadMedida.isBlank()) {
-            throw new IllegalArgumentException("La unidad de medida no puede estar vacía.");
         }
         if (porcentajeIva < 0 || porcentajeIva > 100) {
             throw new IllegalArgumentException("El porcentaje de IVA debe estar entre 0 y 100.");

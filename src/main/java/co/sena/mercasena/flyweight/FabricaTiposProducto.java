@@ -15,15 +15,15 @@ public class FabricaTiposProducto {
         TipoProducto tipo = cache.get(clave);
         if (tipo == null) {
             tipo = new TipoProducto(categoria.trim(), unidad.trim(), porcentajeIva);
-            // Corrección #1: guardar el flyweight en el caché para reutilizarlo
             cache.put(clave, tipo);
         }
         return tipo;
     }
 
     private String construirClave(String categoria, String unidad, int porcentajeIva) {
-        // Corrección #1: separador explícito y normalización para evitar colisiones
-        return categoria.trim().toLowerCase() + "|" + unidad.trim().toLowerCase() + "|" + porcentajeIva;
+        return categoria.trim().toLowerCase()
+                + "|" + unidad.trim().toLowerCase()
+                + "|iva:" + porcentajeIva;
     }
 
     private void validarDatosTipo(String categoria, String unidad, int porcentajeIva) {
